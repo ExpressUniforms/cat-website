@@ -36,19 +36,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 // ── Config ───────────────────────────────────────────────────
 async function loadConfig() {
   try {
-    // First try to fetch from serverless API (production)
+    // Fetch config from server API
     const res = await fetch('/api/config');
-    console.log('[v0] /api/config response status:', res.status);
     if (res.ok) {
       const config = await res.json();
-      console.log('[v0] Config loaded:', config);
       catApiKey = config.CAT_API_KEY || '';
       hasAnthropicKey = config.HAS_ANTHROPIC_KEY || false;
-      console.log('[v0] catApiKey set:', !!catApiKey, 'hasAnthropicKey:', hasAnthropicKey);
       return;
     }
   } catch (e) {
-    console.log('[v0] /api/config fetch error:', e);
     // API route not available, try local config.js
   }
   

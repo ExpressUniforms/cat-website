@@ -1,12 +1,15 @@
 {
   "name": "cat-lab",
   "version": "1.0.0",
+  "type": "module",
   "description": "A warm, playful cat website with AI-powered naming using The Cat API and Claude",
-  "main": "proxy.js",
+  "main": "server.js",
   "scripts": {
-    "start": "npx serve .",
-    "proxy": "node proxy.js",
-    "dev": "npx serve . & node proxy.js"
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   },
   "keywords": [
     "cats",
