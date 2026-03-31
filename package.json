@@ -1,0 +1,24 @@
+{
+  "name": "cat-lab",
+  "version": "1.0.0",
+  "description": "A warm, playful cat website with AI-powered naming using The Cat API and Claude",
+  "main": "proxy.js",
+  "scripts": {
+    "start": "npx serve .",
+    "proxy": "node proxy.js",
+    "dev": "npx serve . & node proxy.js"
+  },
+  "keywords": [
+    "cats",
+    "cat-api",
+    "anthropic",
+    "claude",
+    "ai",
+    "gallery"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
