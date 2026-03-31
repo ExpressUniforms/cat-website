@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -13,9 +12,6 @@ app.use(express.json());
 
 // API: Config endpoint
 app.get('/api/config', (req, res) => {
-  console.log('[v0] /api/config hit');
-  console.log('[v0] CAT_API_KEY:', process.env.CAT_API_KEY ? 'SET' : 'NOT SET');
-  console.log('[v0] ANTHROPIC_API_KEY:', process.env.ANTHROPIC_API_KEY ? 'SET' : 'NOT SET');
   res.json({
     CAT_API_KEY: process.env.CAT_API_KEY || '',
     HAS_ANTHROPIC_KEY: !!process.env.ANTHROPIC_API_KEY,
@@ -63,8 +59,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`[v0] Server running on http://localhost:${PORT}`);
-  console.log('[v0] Environment check on startup:');
-  console.log('[v0] CAT_API_KEY:', process.env.CAT_API_KEY ? 'SET' : 'NOT SET');
-  console.log('[v0] ANTHROPIC_API_KEY:', process.env.ANTHROPIC_API_KEY ? 'SET' : 'NOT SET');
+  console.log(`Server running on http://localhost:${PORT}`);
 });
