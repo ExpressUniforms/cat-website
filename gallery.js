@@ -5,19 +5,19 @@
 
 const CAT_API_BASE     = 'https://api.thecatapi.com/v1/images/search';
 const CAT_API_BREEDS   = 'https://api.thecatapi.com/v1/breeds';
-const ANTHROPIC_BASE   = 'http://localhost:3001/v1/messages';
+const ANTHROPIC_BASE   = '/api/claude';  // Serverless proxy
 const CLAUDE_MODEL     = 'claude-haiku-4-5-20251001';
 const PAGE_SIZE        = 12;
 
-let catApiKey      = '';
-let anthropicKey   = '';
-let isLoading      = false;
+let catApiKey         = '';
+let hasAnthropicKey   = false;  // Server-side key availability
+let isLoading         = false;
 let activeBreedId   = '';
 let activeBreedName = '';
 
 // ── Init ─────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  loadConfig();
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadConfig();
   checkApiBanner();
   fetchBreeds();
 
@@ -34,24 +34,38 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ── Config ───────────────────────────────────────────────────
-function loadConfig() {
+async function loadConfig() {
+  try {
+    // First try to fetch from serverless API (production)
+    const res = await fetch('/api/config');
+    if (res.ok) {
+      const config = await res.json();
+      catApiKey = config.CAT_API_KEY || '';
+      hasAnthropicKey = config.HAS_ANTHROPIC_KEY || false;
+      return;
+    }
+  } catch (e) {
+    // API route not available, try local config.js
+  }
+  
+  // Fallback to local config.js (local development)
   try {
     if (typeof CONFIG !== 'undefined') {
-      catApiKey    = CONFIG.CAT_API_KEY    || '';
-      anthropicKey = CONFIG.ANTHROPIC_API_KEY || '';
+      catApiKey = CONFIG.CAT_API_KEY || '';
+      hasAnthropicKey = !!(CONFIG.ANTHROPIC_API_KEY && CONFIG.ANTHROPIC_API_KEY !== 'YOUR_ANTHROPIC_API_KEY_HERE');
     }
   } catch (e) {
     console.warn('config.js not found or invalid. Running without API keys.');
   }
+  
   // Treat placeholder strings as empty
-  if (catApiKey    === 'YOUR_CAT_API_KEY_HERE')    catApiKey    = '';
-  if (anthropicKey === 'YOUR_ANTHROPIC_API_KEY_HERE') anthropicKey = '';
+  if (catApiKey === 'YOUR_CAT_API_KEY_HERE') catApiKey = '';
 }
 
 function checkApiBanner() {
   const banner = document.getElementById('api-banner');
   if (!banner) return;
-  if (!catApiKey || !anthropicKey) {
+  if (!catApiKey || !hasAnthropicKey) {
     banner.style.display = 'flex';
   }
 }
@@ -224,8 +238,8 @@ function toggleHeart(card, cat) {
 
 // ── Name a cat via Claude vision ──────────────────────────────
 async function nameCat(card, cat) {
-  if (!anthropicKey) {
-    showToast('Add your Anthropic API key to config.js to use AI naming ✨', '');
+  if (!hasAnthropicKey) {
+    showToast('Anthropic API key not configured. Add it to environment variables.', '');
     return;
   }
 
@@ -304,9 +318,7 @@ Be creative and specific to what you see — no generic names like "Fluffy" or "
   const res = await fetch(ANTHROPIC_BASE, {
     method:  'POST',
     headers: {
-      'Content-Type':                    'application/json',
-      'x-api-key':                       anthropicKey,
-      'anthropic-version':               '2023-06-01',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(body),
   });
