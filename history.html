@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cat History — Cat Lab</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .history-hero {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+    }
+    .history-hero h1 { color: var(--white); margin-bottom: 1rem; }
+    .history-hero p  { color: rgba(255,255,255,0.8); font-size: 1.1rem; max-width: 560px; margin: 0 auto; }
+
+    .fun-facts {
+      background: var(--cream-dark);
+      padding: 4rem 2rem;
+    }
+    .fun-facts-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    .fact-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+    .fact-card .fact-emoji { font-size: 2rem; display: block; margin-bottom: 0.75rem; }
+    .fact-card p { font-size: 0.88rem; line-height: 1.6; color: var(--mid-grey); }
+    .fact-card strong { color: var(--charcoal); font-size: 1rem; display: block; margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">🐱 <span>Cat Lab</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="history.html" class="active">Cat History</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="favourites.html">My Favourites</a></li>
+      </ul>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="history-hero">
+    <p class="pill-label" style="background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.8);">Cat History</p>
+    <h1>10,000 Years of<br>Running the World</h1>
+    <p>They didn't join our civilisation — they let us join theirs. Here's the remarkable, true story of how cats went from wildcat to internet icon.</p>
+  </section>
+
+  <!-- Timeline -->
+  <section class="page-content">
+    <div class="section-header">
+      <p class="pill-label">The Timeline</p>
+      <h2>From the Fertile Crescent<br>to your phone screen</h2>
+      <p>Scroll down through 10,000 years of cats being exactly as unbothered as they are today.</p>
+    </div>
+
+    <div class="timeline" id="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="timeline-dot"></div>
+          <span class="timeline-era">~10,000 BCE · Near East</span>
+          <span class="timeline-emoji">🌾</span>
+          <h3>The Original Arrangement</h3>
+          <p>As humans in the Fertile Crescent began farming and storing grain, mice arrived. Where mice arrived, wildcats (<em>Felis silvestris lybica</em>) followed — not because humans invited them, but because the buffet was good. The relationship was mutually beneficial from day one: humans got pest control, cats got easy meals. Nobody signed a contract, but somehow it stuck.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="timeline-dot"></div>
+          <span class="timeline-era">~7,500 BCE · Cyprus</span>
+          <span class="timeline-emoji">⚰️</span>
+          <h3>The First Cat Burial</h3>
+          <p>Archaeologists on Cyprus unearthed a grave at Shillourokambos containing a human and a cat, buried together deliberately — the cat placed just 40 centimetres from its owner. Since cats aren't native to Cyprus, this one was brought by ship, suggesting it was already a companion, not just a barn animal. It's the earliest hard evidence of a genuine human-cat bond.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="timeline-dot"></div>
+          <span class="timeline-era">~3,100 BCE · Ancient Egypt</span>
+          <span class="timeline-emoji">𓂀</span>
+          <h3>Gods and Goddess Bastet</h3>
+          <p>In ancient Egypt, cats became sacred animals associated with Bastet, the goddess of home, fertility, and protection. Killing a cat — even accidentally — was punishable by death. Thousands of cats were mummified as offerings to the gods, and wealthy families mourned their cats by shaving their eyebrows. When a house cat died, the whole family went into formal mourning. Egypt had, in short, fully understood the assignment.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="timeline-dot"></div>
+          <span class="timeline-era">~30 BCE · Roman Empire</span>
+          <span class="timeline-emoji">🏛️</span>
+          <h3>Rome Spreads Cats Across Europe</h3>
+          <p>Roman legions brought cats with them wherever they marched. Cats were the standard solution to rodent problems in grain stores and military camps. As Rome expanded across Europe, North Africa, and into Asia, domestic cats spread with them. Archaeological finds of cat bones alongside Roman settlements in Britain, France, and Germany confirm that our modern European house cats can trace their journey to Roman logistics officers who needed someone to deal with the rats.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="timeline-dot"></div>
+          <span class="timeline-era">~999 CE · Japan</span>
+          <span class="timeline-emoji">🏯</span>
+          <h3>Cats Arrive in Japan</h3>
+          <p>Japan's first recorded domestic cat arrived from China around the late 10th century, initially brought to protect sacred Buddhist manuscripts from mice in temples and imperial palaces. Emperor Uda famously wrote in his diary about his beloved black cat in 889 CE with the kind of enthusiasm that wouldn't look out of place on modern social media. Cats were so valued they were kept on leashes, kept indoors, and treated as luxury items — the iPhone of the Heian period.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="timeline-dot"></div>
+          <span class="timeline-era">1400s–1800s · The High Seas</span>
+          <span class="timeline-emoji">⛵</span>
+          <h3>Ship Cats Rule the Oceans</h3>
+          <p>Every serious sailing vessel kept cats aboard. They controlled rats and mice that would otherwise eat provisions and chew through ropes, and sailors also considered them good luck. Ship cats were genuine crew members — they appeared on manifests, earned wages (in theory), and some became legendary figures. Mrs. Chippy, a tabby on Shackleton's ill-fated Antarctic expedition of 1914, is still honoured with a bronze statue in New Zealand. It's complicated, but the statue is there.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="timeline-dot"></div>
+          <span class="timeline-era">1871 · London</span>
+          <span class="timeline-emoji">🎪</span>
+          <h3>The First Cat Show</h3>
+          <p>The world's first formal cat show was held at Crystal Palace in London on 13 July 1871, organised by artist and cat enthusiast Harrison Weir. Around 160 cats were entered across 25 classes. It was, by all accounts, a polite and enthusiastic affair that launched the modern tradition of cat breeding and showing. Weir, who owned 17 cats himself, wanted to give cats "the recognition they deserve." He was not wrong.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="timeline-dot"></div>
+          <span class="timeline-era">1963 · Paris, France</span>
+          <span class="timeline-emoji">🚀</span>
+          <h3>Félicette: The First Cat in Space</h3>
+          <p>On 18 October 1963, a French street cat named Félicette became the first and only cat ever launched into space. She was fitted with electrodes to monitor her neurological activity, launched 157 km above Earth on a Véronique AG1 rocket, and recovered safely after a 13-minute flight. She survived in perfect health. France's space programme had initially recruited 14 cats for training — Félicette was selected for her calm temperament. A bronze statue of her now stands at the International Space University in Strasbourg.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="timeline-dot"></div>
+          <span class="timeline-era">2011 · 10 Downing Street, London</span>
+          <span class="timeline-emoji">🇬🇧</span>
+          <h3>Larry: Chief Mouser to the Cabinet Office</h3>
+          <p>Larry the tabby was adopted from Battersea Dogs & Cats Home in 2011 and given the official title "Chief Mouser to the Cabinet Office" — a real, formally recognised role in the British government. He has outlasted multiple Prime Ministers (Cameron, May, Johnson, Truss, Sunak, and counting), is occasionally spotted in official photographs, and once had a very visible disagreement with Larry the Downing Street cat's nemesis — a fox. He remains in post.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="timeline-dot"></div>
+          <span class="timeline-era">2012 · The Internet</span>
+          <span class="timeline-emoji">💻</span>
+          <h3>Grumpy Cat and the Meme Era</h3>
+          <p>Tardar Sauce — better known as Grumpy Cat — was posted to Reddit in September 2012 by her owner. Within days she was a global phenomenon. Her permanently displeased expression (caused by feline dwarfism and an underbite) spawned millions of memes, a feature film, merchandise deals, and a net worth estimated at $100 million. She passed away in 2019, but remains the gold standard of cat internet fame. Lil Bub, Nyan Cat, and Keyboard Cat all deserve honourable mentions in this same era.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="timeline-dot"></div>
+          <span class="timeline-era">Today · Your Screen</span>
+          <span class="timeline-emoji">📱</span>
+          <h3>And Here We Are</h3>
+          <p>Cats are now the undisputed monarchs of the internet. There are over 3.5 billion cat videos online. Instagram, TikTok, and YouTube have entire ecosystems built around them. AI models are being trained to generate cat images. And you're here, on a website dedicated to browsing cat photos and having an AI name them. The wildcats of the Fertile Crescent would be absolutely unsurprised by all of this.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Fun Facts -->
+  <section class="fun-facts">
+    <div class="fun-facts-inner">
+      <div class="section-header">
+        <p class="pill-label">Did You Know?</p>
+        <h2>Cat facts worth knowing</h2>
+      </div>
+      <div class="facts-grid">
+        <div class="fact-card">
+          <span class="fact-emoji">😴</span>
+          <strong>12–16 hours of sleep a day</strong>
+          <p>Cats spend about 70% of their lives asleep. In a 15-year lifespan, that's roughly 10 years of napping. An impressive and aspirational lifestyle.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">📣</span>
+          <strong>Meowing is just for humans</strong>
+          <p>Adult cats almost never meow at each other. The meow was developed specifically for communication with humans. Your cat invented a language just for you.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">🦴</span>
+          <strong>Cats have more bones than humans</strong>
+          <p>Humans have 206 bones. Cats have 244 — including a highly flexible spine and a clavicle that isn't attached to anything, which is why they can squeeze through tiny gaps.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">🐾</span>
+          <strong>Cats walk like camels</strong>
+          <p>Cats and camels are the only animals that move both right legs then both left legs when walking. Giraffes do it too. It's called "pacing" and it's surprisingly rare.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">🎵</span>
+          <strong>Purring can heal bones</strong>
+          <p>A cat's purr vibrates at 25–50 Hz, a frequency shown to promote bone density and healing. Some researchers believe purring evolved partly as self-healing. Cats are, medically speaking, miraculous.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">🌍</span>
+          <strong>~600 million domestic cats worldwide</strong>
+          <p>There are an estimated 600 million domestic cats on Earth, with around 90 million in the US alone. They are one of the most successful large predators in the world, despite being very small.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-logo">🐱 Cat Lab</div>
+    <p>Photos from <a href="https://thecatapi.com" target="_blank" style="color:var(--coral-light);">The Cat API</a> · AI naming by <a href="https://anthropic.com" target="_blank" style="color:var(--coral-light);">Claude</a></p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="history.js"></script>
+</body>
+</html>

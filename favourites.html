@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Favourites — Cat Lab</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .favs-hero {
+      background: linear-gradient(135deg, var(--coral) 0%, var(--coral-light) 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 3.5rem 2rem 3rem;
+    }
+    .favs-hero h1 { color: var(--white); font-size: clamp(1.8rem, 4vw, 3rem); }
+    .favs-hero p  { color: rgba(255,255,255,0.85); font-size: 1rem; margin-top: 0.5rem; }
+    .favs-count {
+      font-size: 0.85rem;
+      color: var(--mid-grey);
+      margin-bottom: 1.5rem;
+    }
+    .favs-count strong { color: var(--charcoal); }
+
+    /* Override cat-card heart button in favourites — always show as loved */
+    .fav-cat-card .heart-btn { background: var(--coral); color: var(--white); }
+    .fav-cat-card .heart-btn:hover { background: var(--coral-dark); }
+
+    .clear-btn {
+      color: var(--mid-grey);
+      font-size: 0.85rem;
+      text-decoration: underline;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+    .clear-btn:hover { color: var(--coral); }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">🐱 <span>Cat Lab</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="history.html">Cat History</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="favourites.html" class="active">My Favourites</a></li>
+      </ul>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="favs-hero">
+    <p class="pill-label" style="background:rgba(255,255,255,0.15); color:var(--white);">My Collection</p>
+    <h1>My Favourite Cats ❤️</h1>
+    <p>The cats you hearted live here. They're saved in your browser.</p>
+  </section>
+
+  <section class="page-content">
+    <div id="favs-meta" style="display:flex; align-items:center; flex-wrap:wrap; gap:0.5rem;"></div>
+
+    <!-- Favourites grid or empty state -->
+    <div id="favs-container"></div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-logo">🐱 Cat Lab</div>
+    <p>Photos from <a href="https://thecatapi.com" target="_blank" style="color:var(--coral-light);">The Cat API</a> · AI naming by <a href="https://anthropic.com" target="_blank" style="color:var(--coral-light);">Claude</a></p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    /* ── Favourites page logic ─────────────────────────────── */
+    document.addEventListener('DOMContentLoaded', renderFavourites);
+
+    function renderFavourites() {
+      const favs      = Favourites.getAll();
+      const container = document.getElementById('favs-container');
+      const metaEl    = document.getElementById('favs-meta');
+      container.innerHTML = '';
+      metaEl.innerHTML    = '';
+
+      if (favs.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <span class="empty-icon">🐾</span>
+            <h3>No favourites yet</h3>
+            <p>Head to the gallery, find a cat you love, and tap the ❤️ button.</p>
+            <a href="gallery.html" class="btn btn-primary">Browse the Gallery</a>
+          </div>
+        `;
+        return;
+      }
+
+      // Meta row
+      metaEl.innerHTML = `<p class="favs-count"><strong>${favs.length}</strong> saved cat${favs.length === 1 ? '' : 's'}</p>`;
+      const clearBtn = document.createElement('button');
+      clearBtn.className   = 'clear-btn';
+      clearBtn.textContent = 'Clear all';
+      clearBtn.addEventListener('click', clearAllFavourites);
+      metaEl.appendChild(clearBtn);
+
+      // Grid
+      const grid = document.createElement('div');
+      grid.className = 'gallery-grid';
+      grid.style.marginTop = '1.5rem';
+
+      favs.forEach(cat => {
+        const card = buildFavCard(cat);
+        grid.appendChild(card);
+      });
+
+      container.appendChild(grid);
+    }
+
+    function buildFavCard(cat) {
+      const card = document.createElement('div');
+      card.className = 'cat-card fav-cat-card';
+      card.dataset.catId = cat.id;
+
+      card.innerHTML = `
+        <div class="cat-card-img-wrap">
+          <img src="${escHtml(cat.url)}" alt="${escHtml(cat.name || 'A cat')}" loading="lazy" />
+          <div class="cat-card-actions">
+            <button class="heart-btn loved" title="Remove from favourites" aria-label="Remove from favourites">
+              ❤️
+            </button>
+          </div>
+        </div>
+        <div class="cat-card-body">
+          <div class="cat-name">${escHtml(cat.name || '')}</div>
+          <div class="cat-personality">${escHtml(cat.personality || '')}</div>
+        </div>
+      `;
+
+      card.querySelector('.heart-btn').addEventListener('click', () => {
+        Favourites.remove(cat.id);
+        // Animate out
+        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        card.style.opacity    = '0';
+        card.style.transform  = 'scale(0.9)';
+        setTimeout(() => {
+          card.remove();
+          // Update count
+          const remaining = Favourites.count();
+          const metaEl    = document.getElementById('favs-meta');
+          if (remaining === 0) {
+            renderFavourites(); // show empty state
+          } else {
+            metaEl.querySelector('.favs-count').innerHTML =
+              `<strong>${remaining}</strong> saved cat${remaining === 1 ? '' : 's'}`;
+          }
+          showToast('Removed from favourites', '');
+        }, 280);
+      });
+
+      return card;
+    }
+
+    function clearAllFavourites() {
+      if (!confirm('Remove all saved cats? This can\'t be undone.')) return;
+      localStorage.removeItem('catlab_favourites');
+      renderFavourites();
+      showToast('All favourites cleared', '');
+    }
+
+    function escHtml(str) {
+      if (!str) return '';
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+  </script>
+</body>
+</html>

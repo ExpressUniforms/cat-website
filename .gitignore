@@ -1,0 +1,16 @@
+# API keys — never commit this
+config.js
+
+# Claude / Cowork internal files
+.claude/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Logs
+*.log

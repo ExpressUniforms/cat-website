@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — Cat Lab</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .gallery-hero {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 3.5rem 2rem 3rem;
+    }
+    .gallery-hero h1 { color: var(--white); font-size: clamp(1.8rem, 4vw, 3rem); }
+    .gallery-hero p  { color: rgba(255,255,255,0.85); font-size: 1rem; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">🐱 <span>Cat Lab</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="history.html">Cat History</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="favourites.html">My Favourites</a></li>
+      </ul>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="gallery-hero">
+    <p class="pill-label" style="background:rgba(255,255,255,0.15); color:var(--white);">Live Gallery</p>
+    <h1>Meet Today's Cats</h1>
+    <p>Fresh photos from The Cat API. Hit ✨ to get an AI-generated name. Hit ❤️ to save a favourite.</p>
+  </section>
+
+  <!-- ── Breed Filter Bar ──────────────────────────────────── -->
+  <div class="filter-bar">
+    <div class="filter-bar-inner">
+      <label for="breed-select" class="filter-label">Filter by breed</label>
+      <div class="filter-select-wrap">
+        <select id="breed-select" class="filter-select" disabled>
+          <option value="">All breeds</option>
+        </select>
+      </div>
+      <span class="filter-count" id="filter-count" aria-live="polite"></span>
+    </div>
+  </div>
+
+  <section class="page-content">
+
+    <!-- API Key Banner -->
+    <div class="api-banner" id="api-banner" style="display:none;">
+      <span class="banner-icon">⚠️</span>
+      <div>
+        <h4>API keys not configured</h4>
+        <p>Open <code>config.js</code> in your Cat Website folder and add your Cat API key and Anthropic API key. The gallery will load without a Cat API key, but the AI naming feature needs your Anthropic key.</p>
+      </div>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="gallery-grid" id="gallery-grid">
+      <!-- Skeleton loaders render here first, then replaced with real cards -->
+    </div>
+
+    <!-- Load More -->
+    <div class="load-more-wrap">
+      <button class="btn btn-secondary" id="load-more-btn">
+        Load More Cats 🐾
+      </button>
+    </div>
+
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-logo">🐱 Cat Lab</div>
+    <p>Photos from <a href="https://thecatapi.com" target="_blank" style="color:var(--coral-light);">The Cat API</a> · AI naming by <a href="https://anthropic.com" target="_blank" style="color:var(--coral-light);">Claude</a></p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+  <script src="gallery.js"></script>
+</body>
+</html>

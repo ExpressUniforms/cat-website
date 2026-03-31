@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cat Lab 🐱 — Your Favourite Cat Corner</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Home-specific styles */
+    .welcome-band {
+      background: var(--cream-dark);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+    .welcome-band .inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .welcome-band h2 { margin-bottom: 1rem; }
+    .welcome-band p  { font-size: 1.05rem; line-height: 1.8; margin-bottom: 2rem; }
+
+    .showcase-section {
+      padding: 5rem 2rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 5rem;
+    }
+    .showcase-grid.flip { direction: rtl; }
+    .showcase-grid.flip > * { direction: ltr; }
+    .showcase-text { padding: 1rem; }
+    .showcase-text h3 { font-size: 1.6rem; color: var(--charcoal); margin-bottom: 0.75rem; }
+    .showcase-text p  { font-size: 1rem; line-height: 1.8; margin-bottom: 1.5rem; }
+    .showcase-img {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: var(--cream-dark);
+    }
+    .showcase-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .showcase-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      background: linear-gradient(135deg, var(--cream-dark), var(--light-grey));
+    }
+
+    .cta-band {
+      background: linear-gradient(135deg, var(--teal), var(--teal-light));
+      color: var(--white);
+      text-align: center;
+      padding: 5rem 2rem;
+    }
+    .cta-band h2 { color: var(--white); margin-bottom: 1rem; }
+    .cta-band p  { color: rgba(255,255,255,0.85); font-size: 1.1rem; margin-bottom: 2.5rem; }
+    .cta-btn-group { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .btn-white { background: var(--white); color: var(--teal-dark); }
+    .btn-white:hover { background: var(--cream); }
+    .btn-outline-white { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.6); }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.15); }
+
+    .stat-band {
+      background: var(--white);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .stat { }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--coral);
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.85rem; color: var(--mid-grey); margin-top: 0.3rem; }
+
+    @media (max-width: 768px) {
+      .showcase-grid, .showcase-grid.flip { grid-template-columns: 1fr; direction: ltr; }
+      .stats-row { gap: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">🐱 <span>Cat Lab</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="history.html">Cat History</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="favourites.html">My Favourites</a></li>
+      </ul>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="pill-label" style="background:rgba(255,255,255,0.2); color:var(--white);">Welcome to Cat Lab</p>
+      <h1>Where Every Cat<br>Tells a Story</h1>
+      <p class="tagline">Browse live cat photos, discover the secret history of cats,<br>and let AI name your new favourite furball.</p>
+      <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
+        <a href="gallery.html" class="btn btn-lg" style="background:var(--white); color:var(--coral);">Browse the Gallery 🐾</a>
+        <a href="history.html" class="btn btn-lg btn-outline-white">Explore Cat History</a>
+      </div>
+      <div class="hero-cats">
+        <img class="hero-cat-img" src="https://cataas.com/cat" alt="Cat 1" loading="lazy" onerror="this.style.display='none'">
+        <img class="hero-cat-img" src="https://cataas.com/cat?t=2" alt="Cat 2" loading="lazy" onerror="this.style.display='none'">
+        <img class="hero-cat-img" src="https://cataas.com/cat?t=3" alt="Cat 3" loading="lazy" onerror="this.style.display='none'">
+        <img class="hero-cat-img" src="https://cataas.com/cat?t=4" alt="Cat 4" loading="lazy" onerror="this.style.display='none'">
+        <img class="hero-cat-img" src="https://cataas.com/cat?t=5" alt="Cat 5" loading="lazy" onerror="this.style.display='none'">
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats band -->
+  <div class="stat-band">
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-number">10,000+</div>
+        <div class="stat-label">Cat photos in The Cat API</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">~10,000</div>
+        <div class="stat-label">Years cats have lived with humans</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Reasons to love cats</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Welcome copy -->
+  <section class="welcome-band">
+    <div class="inner">
+      <p class="pill-label">What is Cat Lab?</p>
+      <h2>A cat corner built with<br>curiosity and a lot of love</h2>
+      <p>Cat Lab pulls fresh photos straight from The Cat API, lets you name them with a little help from Claude AI, and saves your favourites so you can revisit the ones that made you smile. There's also a whole history page — because cats have been shaping human civilisation for millennia, and they deserve credit for it.</p>
+      <a href="gallery.html" class="btn btn-primary">Open the Gallery →</a>
+    </div>
+  </section>
+
+  <!-- Feature Cards -->
+  <section class="page-content" style="padding-top:4rem; padding-bottom:4rem;">
+    <div class="section-header">
+      <p class="pill-label">Features</p>
+      <h2>Everything you need for a<br>proper cat obsession</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">📸</span>
+        <h3>Live Cat Gallery</h3>
+        <p>Fresh photos pulled from The Cat API every time you visit. Twelve at a time, with a "Load More" button when you inevitably want to see another twelve.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🤖</span>
+        <h3>AI Name Generator</h3>
+        <p>Hit the magic wand on any photo and Claude AI analyses the cat's face and gives it a creative name with a one-sentence personality description. No two cats get the same name.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">❤️</span>
+        <h3>Favourites Collection</h3>
+        <p>Heart any cat to save it to your personal collection. Favourites live in your browser, so they're always there waiting for you — no account needed.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🏛️</span>
+        <h3>Cat History Timeline</h3>
+        <p>An animated, illustrated timeline of cats through history — from the Fertile Crescent to Félicette the space cat to the golden age of cat memes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Showcase: Gallery -->
+  <section class="showcase-section">
+    <div class="showcase-grid">
+      <div class="showcase-text">
+        <p class="pill-label">The Gallery</p>
+        <h3>New cats every visit, named by AI</h3>
+        <p>Every photo is fetched live from The Cat API — a constantly-updated database of thousands of real cat photos. Tap the magic wand icon and Claude Haiku analyses the image using vision to come up with a name that actually fits the cat's vibe.</p>
+        <a href="gallery.html" class="btn btn-primary">Open Gallery →</a>
+      </div>
+      <div class="showcase-img">
+        <div class="showcase-placeholder">🐱</div>
+      </div>
+    </div>
+
+    <div class="showcase-grid flip">
+      <div class="showcase-text">
+        <p class="pill-label">Cat History</p>
+        <h3>10,000 years of cats running the world</h3>
+        <p>Cats weren't domesticated — they chose us. Scroll through an animated timeline covering ancient Egypt, ship cats, the first feline astronaut, and why your tabby probably thinks it owns you. Because it does.</p>
+        <a href="history.html" class="btn btn-teal">Explore History →</a>
+      </div>
+      <div class="showcase-img">
+        <div class="showcase-placeholder">🏛️</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Band -->
+  <section class="cta-band">
+    <h2>Ready to meet your new favourite cat?</h2>
+    <p>Browse hundreds of live photos, name a few with AI, and build a collection worth coming back to.</p>
+    <div class="cta-btn-group">
+      <a href="gallery.html" class="btn btn-lg btn-white">Browse the Gallery</a>
+      <a href="favourites.html" class="btn btn-lg btn-outline-white">See My Favourites</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-logo">🐱 Cat Lab</div>
+    <p>Photos from <a href="https://thecatapi.com" target="_blank" style="color:var(--coral-light);">The Cat API</a> · AI naming by <a href="https://anthropic.com" target="_blank" style="color:var(--coral-light);">Claude</a></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
